@@ -1,0 +1,6 @@
+functions:
+  registerDevice:
+    type: resolver
+    handler:
+      code: src/resolvers/registerDevice/handler.js
+    schema: src/resolvers/registerDevice/schema.graphql
