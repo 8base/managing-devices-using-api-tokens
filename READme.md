@@ -4,7 +4,7 @@ When we think of authorization in app development, it's usually from the perspec
 
 That said, not all applications are centered around an individually logged-in user. It's not uncommon that authorization for a given application needs to be handled within the context of a device. Think of Internet of Things (IoT) devices, VR headsets, registration kiosks, and others where the device itself - or installed application - is the authenticated entity.
 
-Sometimes, this type of authorization is used purely for secure machine-to-machine applications, such as factory monitoring devices where sensors send equipment data to a central monitoring system. Other times, a single device is authorized so that multiple-users can access it at a given time, like an event registration kiosk. Regardless of the specific usecase, what's required is a reliable system for authenticating devices, generating API tokens, assigning those tokens the necessary authorizations, and returning a credential back to the device.
+Sometimes, this type of authorization is used purely for secure machine-to-machine applications, such as factory monitoring devices where sensors send equipment data to a central monitoring system. Other times, a single device is authorized so that multiple-users can access it at a given time, like an event registration kiosk. Regardless of the specific use case, what's required is a reliable system for authenticating devices, generating API tokens, assigning those tokens the necessary authorizations, and returning a credential back to the device.
 
 ## Tutorial
 
@@ -12,12 +12,12 @@ In this tutorial we're going to develop a strategy for registering devices. This
 
 **Technologies:**
 
-1. 8base Workspace - Backend-as-a-Servce with GraphQL API
+1. 8base Workspace - Backend-as-a-Service with GraphQL API
 2. Node.js - JavaScript runtime environment that executes JavaScript code outside a web browser
 
 ## Step 1 - Setting up the "Device"
 
-We're going to write several simple scripts that we can execute manually from the command line. One will allow us to register the device and recieve a token, others will make authenticated requests for sending data to and reading data from the API. In this scenario, think of the _Device_ as being your computer.
+We're going to write several simple scripts that we can execute manually from the command line. One will allow us to register the device and receive a token, others will make authenticated requests for sending data to and reading data from the API. In this scenario, think of the _Device_ as being your computer.
 
 Clone this project so that you can look through each script as we reference what's happening.
 
@@ -47,7 +47,7 @@ device/
           └── api.js
 ```
 
-The three functions are very straight forward. The `registerDevice.js` script is the one we'll use to send a registration code and recieve back an API Token, while `readActivity.js` runs a query and `sendActivity.js` runs a mutation. Using these, we'll be able to test our device is working.
+The three functions are very straight forward. The `registerDevice.js` script is the one we'll use to send a registration code and receive back an API Token, while `readActivity.js` runs a query and `sendActivity.js` runs a mutation. Using these, we'll be able to test our device is working.
 
 If you take a moment to look through these files, you'll find that they all have a pretty similar structure. Each one defines a GraphQL call, runs it, and then handles the response or error. If you would like more context, all code files have inline comments.
 
@@ -95,7 +95,7 @@ The next step we're going to need to take is defining the _Role_ a device will h
 
 Navigate to [_App Services > Roles_](https://app.8base.com/app-services/roles) and click the "+" button to add a role. Name it "Device" and optionally throw in a description if you feel like it. Once created, click on the role to enter into the permissions view.
 
-Roles and permissions are extremely specific to any given project/implimentation. That said, for this one there are a few permissions that our device will require in order to successfully run its scripts. To start though, make sure all permissions are turned off.
+Roles and permissions are extremely specific to any given project/implementation. That said, for this one there are a few permissions that our device will require in order to successfully run its scripts. To start though, make sure all permissions are turned off.
 
 In order to make sure any registered device only has access to the records relevant to itself, we're going to use custom filters that use the API Token that authorizes a request to scope the records.
 
@@ -251,7 +251,7 @@ export default async (event, ctx) => {
     ));
   }
   /**
-   * Create a new device and connext it to
+   * Create a new device and connect it to
    * the API Token and Registration code.
    */
   const {
@@ -282,7 +282,7 @@ export default async (event, ctx) => {
 
 Having familiarized ourselves with the resolver function, lets deploy it. Go ahead and run `8base deploy` from within the `server` directory. Once deployed, you'll need to update one last thing in roles and permissions.
 
-Essentially, the _Guest_ role defines what resources and permissions an unathenticate request has access to. Since a device will need to register before having recieved an API Token, we need to make sure there is public access to our `registerDevice` operation.
+Essentially, the _Guest_ role defines what resources and permissions an unathenticated request has access to. Since a device will need to register before having received an API Token, we need to make sure there is public access to our `registerDevice` operation.
 
 In [_App Services > Roles_](https://app.8base.com/app-services/roles) click on the _Guest_ role and go to the _Apps_ tab. After deploying the function, "Register Device" should appear under the _Api_ section. Make sure that it is enabled!
 
@@ -317,7 +317,7 @@ npm run exec readActivity
 ]
 ```
 
-Next, lets register our device. In your 8base workspace, go ahead and add new _registrationCode_ with the code set to `1234567890`.
+Next, let's register our device. In your 8base workspace, go ahead and add a new _registrationCode_ with the code set to `1234567890`.
 
 ![Create a registration code in 8base workspace](./.assets/create-new-registration-code.png)
 
@@ -333,9 +333,9 @@ npm run exec registerDevice 1234567890
 Device registered
 ```
 
-Awesome! The device is registered. If you want to see what's changed on the server-side, hop back into the 8base console's _Data Viewer_ and you'll see all the relationships and device record have been created. Also, an API Token will have been generated that can be found in [_Settings > API Tokens_](https://app.8base.com/settings/api-tokens).
+Awesome! The device is registered. If you want to see what's changed on the server-side, hop back into the 8base console's _Data Viewer_ and you'll see all the relationships and device records have been created. Also, an API Token will have been generated that can be found in [_Settings > API Tokens_](https://app.8base.com/settings/api-tokens).
 
-Now lets add some activity.
+Now let's add some activity.
 
 ```sh
 npm run exec sendActivity 100
@@ -361,6 +361,6 @@ Everything seems to be working!
 
 ## Wrap up
 
-In this tutorial, we implimented a strategy for authenticating connected devices using API Tokens, a GraphQL API, Roles and Permissions, and Serverless Functions. There are many enhancements and improvements that could be made to it, like expiration dates on registration codes. That said, this general structure provides a great starting point from which you can move forward.
+In this tutorial, we implemented a strategy for authenticating connected devices using API Tokens, a GraphQL API, Roles and Permissions, and Serverless Functions. There are many enhancements and improvements that could be made to it, like expiration dates on registration codes. That said, this general structure provides a great starting point from which you can move forward.
 
-If you have any question, please feel free to reach out. All the code used in this project is available on GitHub in the [tutorial's repo](https://github.com/8base/managing-devices-using-api-tokens).
+If you have any questions, please feel free to reach out. All the code used in this project is available on GitHub in the [tutorial's repo](https://github.com/8base/managing-devices-using-api-tokens).

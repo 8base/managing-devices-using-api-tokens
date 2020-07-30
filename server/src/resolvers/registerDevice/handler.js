@@ -112,7 +112,7 @@ export default async (event, ctx) => {
     ))
   }
   /**
-   * Create a new device and connext it to
+   * Create a new device and connect it to
    * the API Token and Registration code.
    */
   const {
