@@ -1,0 +1,442 @@
+{
+  "tables": [
+    {
+      "id": "5f21a28438c74f0008788dba",
+      "name": "DataEntries",
+      "displayName": "DataEntries",
+      "isSystem": false,
+      "fields": [
+        {
+          "id": "5f21a28538c74f0008788dc4",
+          "name": "id",
+          "displayName": "ID",
+          "description": null,
+          "fieldType": "ID",
+          "fieldTypeAttributes": null,
+          "isList": false,
+          "isRequired": true,
+          "isUnique": true,
+          "defaultValue": null,
+          "isSystem": true,
+          "isMeta": true,
+          "relation": null
+        },
+        {
+          "id": "5f21a28538c74f0008788dc2",
+          "name": "createdAt",
+          "displayName": "Created At",
+          "description": null,
+          "fieldType": "DATE",
+          "fieldTypeAttributes": {
+            "format": "DATETIME"
+          },
+          "isList": false,
+          "isRequired": false,
+          "isUnique": false,
+          "defaultValue": null,
+          "isSystem": true,
+          "isMeta": true,
+          "relation": null
+        },
+        {
+          "id": "5f21a28538c74f0008788dc0",
+          "name": "updatedAt",
+          "displayName": "Updated At",
+          "description": null,
+          "fieldType": "DATE",
+          "fieldTypeAttributes": {
+            "format": "DATETIME"
+          },
+          "isList": false,
+          "isRequired": false,
+          "isUnique": false,
+          "defaultValue": null,
+          "isSystem": true,
+          "isMeta": true,
+          "relation": null
+        },
+        {
+          "id": "5f21a28438c74f0008788dbc",
+          "name": "createdBy",
+          "displayName": "Created By",
+          "description": null,
+          "fieldType": "RELATION",
+          "fieldTypeAttributes": null,
+          "isList": false,
+          "isRequired": false,
+          "isUnique": false,
+          "defaultValue": null,
+          "isSystem": true,
+          "isMeta": true,
+          "relation": {
+            "refFieldName": null,
+            "refFieldDisplayName": null,
+            "relationTableName": null,
+            "relationFieldName": "createdById",
+            "refTable": {
+              "id": "5d4b24ddcb7c22b71d198acc",
+              "name": "Users"
+            },
+            "refFieldIsList": null,
+            "refFieldIsRequired": null
+          }
+        },
+        {
+          "id": "5f21a2b262cb4e0009aee063",
+          "name": "value",
+          "displayName": "value",
+          "description": null,
+          "fieldType": "NUMBER",
+          "fieldTypeAttributes": {
+            "format": "NUMBER",
+            "precision": 0,
+            "currency": null,
+            "minValue": 0,
+            "maxValue": null,
+            "isBigInt": null
+          },
+          "isList": false,
+          "isRequired": true,
+          "isUnique": false,
+          "defaultValue": null,
+          "isSystem": false,
+          "isMeta": false,
+          "relation": null
+        },
+        {
+          "id": "5f21a2da38c74f000878dc34",
+          "name": "device",
+          "displayName": "Device",
+          "description": null,
+          "fieldType": "RELATION",
+          "fieldTypeAttributes": null,
+          "isList": false,
+          "isRequired": false,
+          "isUnique": null,
+          "defaultValue": null,
+          "isSystem": false,
+          "isMeta": false,
+          "relation": {
+            "refFieldName": "dataEntries",
+            "refFieldDisplayName": "DataEntries",
+            "relationTableName": "DataEntryDevices",
+            "relationFieldName": "dataEntryAId",
+            "refTable": {
+              "id": "5f21a2b638c74f000878ba94",
+              "name": "Devices"
+            },
+            "refFieldIsList": true,
+            "refFieldIsRequired": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "5f21a2b638c74f000878ba94",
+      "name": "Devices",
+      "displayName": "Devices",
+      "isSystem": false,
+      "fields": [
+        {
+          "id": "5f21a2b638c74f000878ba9e",
+          "name": "id",
+          "displayName": "ID",
+          "description": null,
+          "fieldType": "ID",
+          "fieldTypeAttributes": null,
+          "isList": false,
+          "isRequired": true,
+          "isUnique": true,
+          "defaultValue": null,
+          "isSystem": true,
+          "isMeta": true,
+          "relation": null
+        },
+        {
+          "id": "5f21a2b638c74f000878ba9c",
+          "name": "createdAt",
+          "displayName": "Created At",
+          "description": null,
+          "fieldType": "DATE",
+          "fieldTypeAttributes": {
+            "format": "DATETIME"
+          },
+          "isList": false,
+          "isRequired": false,
+          "isUnique": false,
+          "defaultValue": null,
+          "isSystem": true,
+          "isMeta": true,
+          "relation": null
+        },
+        {
+          "id": "5f21a2b638c74f000878ba9a",
+          "name": "updatedAt",
+          "displayName": "Updated At",
+          "description": null,
+          "fieldType": "DATE",
+          "fieldTypeAttributes": {
+            "format": "DATETIME"
+          },
+          "isList": false,
+          "isRequired": false,
+          "isUnique": false,
+          "defaultValue": null,
+          "isSystem": true,
+          "isMeta": true,
+          "relation": null
+        },
+        {
+          "id": "5f21a2b638c74f000878ba96",
+          "name": "createdBy",
+          "displayName": "Created By",
+          "description": null,
+          "fieldType": "RELATION",
+          "fieldTypeAttributes": null,
+          "isList": false,
+          "isRequired": false,
+          "isUnique": false,
+          "defaultValue": null,
+          "isSystem": true,
+          "isMeta": true,
+          "relation": {
+            "refFieldName": null,
+            "refFieldDisplayName": null,
+            "relationTableName": null,
+            "relationFieldName": "createdById",
+            "refTable": {
+              "id": "5d4b24ddcb7c22b71d198acc",
+              "name": "Users"
+            },
+            "refFieldIsList": null,
+            "refFieldIsRequired": null
+          }
+        },
+        {
+          "id": "5f21a2c938c74f000878ce70",
+          "name": "name",
+          "displayName": "name",
+          "description": null,
+          "fieldType": "TEXT",
+          "fieldTypeAttributes": {
+            "format": "UNFORMATTED",
+            "fieldSize": 100
+          },
+          "isList": false,
+          "isRequired": false,
+          "isUnique": false,
+          "defaultValue": null,
+          "isSystem": false,
+          "isMeta": false,
+          "relation": null
+        },
+        {
+          "id": "5f21a2da38c74f000878dc37",
+          "name": "dataEntries",
+          "displayName": "DataEntries",
+          "description": null,
+          "fieldType": "RELATION",
+          "fieldTypeAttributes": null,
+          "isList": true,
+          "isRequired": false,
+          "isUnique": null,
+          "defaultValue": null,
+          "isSystem": false,
+          "isMeta": false,
+          "relation": {
+            "refFieldName": "device",
+            "refFieldDisplayName": "Device",
+            "relationTableName": "DataEntryDevices",
+            "relationFieldName": "deviceBId",
+            "refTable": {
+              "id": "5f21a28438c74f0008788dba",
+              "name": "DataEntries"
+            },
+            "refFieldIsList": false,
+            "refFieldIsRequired": false
+          }
+        },
+        {
+          "id": "5f21c41b5707830007bfe564",
+          "name": "registrationCode",
+          "displayName": "RegistrationCode",
+          "description": null,
+          "fieldType": "RELATION",
+          "fieldTypeAttributes": null,
+          "isList": false,
+          "isRequired": false,
+          "isUnique": null,
+          "defaultValue": null,
+          "isSystem": false,
+          "isMeta": false,
+          "relation": {
+            "refFieldName": "device",
+            "refFieldDisplayName": "Device",
+            "relationTableName": "DeviceRegistrationCode",
+            "relationFieldName": "deviceAId",
+            "refTable": {
+              "id": "5f21c3f046d0d80008be4397",
+              "name": "RegistrationCodes"
+            },
+            "refFieldIsList": false,
+            "refFieldIsRequired": false
+          }
+        },
+        {
+          "id": "5f21c44a5707830007c004a4",
+          "name": "apiToken",
+          "displayName": "ApiToken",
+          "description": null,
+          "fieldType": "RELATION",
+          "fieldTypeAttributes": null,
+          "isList": false,
+          "isRequired": false,
+          "isUnique": null,
+          "defaultValue": null,
+          "isSystem": false,
+          "isMeta": false,
+          "relation": {
+            "refFieldName": "device",
+            "refFieldDisplayName": "Device",
+            "relationTableName": "ApiTokenDevice",
+            "relationFieldName": "deviceBId",
+            "refTable": {
+              "id": "5d4b24decb7c2210c8198bcb",
+              "name": "ApiTokens"
+            },
+            "refFieldIsList": false,
+            "refFieldIsRequired": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "5f21c3f046d0d80008be4397",
+      "name": "RegistrationCodes",
+      "displayName": "RegistrationCodes",
+      "isSystem": false,
+      "fields": [
+        {
+          "id": "5f21c3f046d0d80008be43a1",
+          "name": "id",
+          "displayName": "ID",
+          "description": null,
+          "fieldType": "ID",
+          "fieldTypeAttributes": null,
+          "isList": false,
+          "isRequired": true,
+          "isUnique": true,
+          "defaultValue": null,
+          "isSystem": true,
+          "isMeta": true,
+          "relation": null
+        },
+        {
+          "id": "5f21c3f046d0d80008be439f",
+          "name": "createdAt",
+          "displayName": "Created At",
+          "description": null,
+          "fieldType": "DATE",
+          "fieldTypeAttributes": {
+            "format": "DATETIME"
+          },
+          "isList": false,
+          "isRequired": false,
+          "isUnique": false,
+          "defaultValue": null,
+          "isSystem": true,
+          "isMeta": true,
+          "relation": null
+        },
+        {
+          "id": "5f21c3f046d0d80008be439d",
+          "name": "updatedAt",
+          "displayName": "Updated At",
+          "description": null,
+          "fieldType": "DATE",
+          "fieldTypeAttributes": {
+            "format": "DATETIME"
+          },
+          "isList": false,
+          "isRequired": false,
+          "isUnique": false,
+          "defaultValue": null,
+          "isSystem": true,
+          "isMeta": true,
+          "relation": null
+        },
+        {
+          "id": "5f21c3f046d0d80008be4399",
+          "name": "createdBy",
+          "displayName": "Created By",
+          "description": null,
+          "fieldType": "RELATION",
+          "fieldTypeAttributes": null,
+          "isList": false,
+          "isRequired": false,
+          "isUnique": false,
+          "defaultValue": null,
+          "isSystem": true,
+          "isMeta": true,
+          "relation": {
+            "refFieldName": null,
+            "refFieldDisplayName": null,
+            "relationTableName": null,
+            "relationFieldName": "createdById",
+            "refTable": {
+              "id": "5d4b24ddcb7c22b71d198acc",
+              "name": "Users"
+            },
+            "refFieldIsList": null,
+            "refFieldIsRequired": null
+          }
+        },
+        {
+          "id": "5f21c3ff46d0d80008be52b8",
+          "name": "code",
+          "displayName": "code",
+          "description": null,
+          "fieldType": "TEXT",
+          "fieldTypeAttributes": {
+            "format": "UNFORMATTED",
+            "fieldSize": 10
+          },
+          "isList": false,
+          "isRequired": true,
+          "isUnique": true,
+          "defaultValue": null,
+          "isSystem": false,
+          "isMeta": false,
+          "relation": null
+        },
+        {
+          "id": "5f21c41b5707830007bfe561",
+          "name": "device",
+          "displayName": "Device",
+          "description": null,
+          "fieldType": "RELATION",
+          "fieldTypeAttributes": null,
+          "isList": false,
+          "isRequired": false,
+          "isUnique": null,
+          "defaultValue": null,
+          "isSystem": false,
+          "isMeta": false,
+          "relation": {
+            "refFieldName": "registrationCode",
+            "refFieldDisplayName": "RegistrationCode",
+            "relationTableName": "DeviceRegistrationCode",
+            "relationFieldName": "registrationCodeBId",
+            "refTable": {
+              "id": "5f21a2b638c74f000878ba94",
+              "name": "Devices"
+            },
+            "refFieldIsList": false,
+            "refFieldIsRequired": false
+          }
+        }
+      ]
+    }
+  ],
+  "version": "0.0.95"
+}

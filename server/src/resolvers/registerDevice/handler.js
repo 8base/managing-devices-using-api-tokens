@@ -1,46 +1,33 @@
-/**
- * This file was generated using 8base CLI.
- *
- * To learn more about writing custom GraphQL resolver functions, visit
- * the 8base documentation at:
- *
- * https://docs.8base.com/8base-console/custom-functions/resolvers
- *
- * To update this functions invocation settings, update its configuration block
- * in the projects 8base.yml file:
- *  functions:
- *    registerDevice:
- *      ...
- *
- * Data that is sent to this function can be accessed on the event argument at:
- *  event.data[KEY_NAME]
- *
- * To invoke this function locally, run:
- *  8base invoke-local registerDevice -p src/resolvers/registerDevice/mocks/request.json
- */
-
 import gql from 'graphql-tag'
 /**
  * To invoke this function locally, run:
  *  8base invoke-local registerDevice -m request
  */
 
-/* Defauly query options */
+/* Disable permissions when making server-side API calls */
 const NoCheck = {
   checkPermissions: false
 }
 
-/* Query the registration code */
+/**
+ * Query for the registration code.
+ */
 const REGISTRATION_CODE_QUERY = gql`
   query($code: String!) {
     registrationCode(code: $code) {
       id
       code
+      device {
+        id
+      }
     }
   }
 `
 
-/* Create API Token Mutation */
+/**
+ * Create the API Token Mutation. When creating the api token
+ * we also go ahead and connect our Device role to it.
+ */
 const CREATE_API_TOKEN_MUTATION = gql`
   mutation($name: String!) {
     apiTokenCreate(
@@ -52,7 +39,10 @@ const CREATE_API_TOKEN_MUTATION = gql`
   }
 `
 
-/* Connect Device with Token and Mark as Registered */
+/**
+ * Create the device Device and connect it with the
+ * token and registration code.
+ */
 const CREATE_DEVICE_MUTATION = gql`
   mutation($tokenId: ID!, $codeId: ID!, $name: String!) {
     deviceCreate(
@@ -69,21 +59,21 @@ const CREATE_DEVICE_MUTATION = gql`
 `
 
 export default async (event, ctx) => {
-  /* Get registration code */
+  /* Get registration code from mutation args */
   const { code } = event.data
 
-  /* Check if token exists and is valid */
+  /* Query the code to see if it actually exists */
   const { registrationCode } = await ctx.api.gqlRequest(
     REGISTRATION_CODE_QUERY,
     { code },
     NoCheck
   )
 
-  /* API token variable */
+  /* Variable */
   let tokenId = ''
   let apiToken = ''
 
-  /* If no token is found */
+  /* If no code is found, return not found error */
   if (!registrationCode) {
     return {
       data: {
@@ -96,8 +86,21 @@ export default async (event, ctx) => {
         }
       ]
     }
+    /* If code is already assigned to device, return code assigned error */
+  } else if (registrationCode.device) {
+    return {
+      data: {
+        apiToken
+      },
+      errors: [
+        {
+          message: 'The submitted registration code was already used.',
+          code: 'code_assigned'
+        }
+      ]
+    }
+    /* If the code is valid, create a new API Token */
   } else {
-    /* Code is valid */
     ;({
       apiTokenCreate: { id: tokenId, token: apiToken }
     } = await ctx.api.gqlRequest(
@@ -108,8 +111,10 @@ export default async (event, ctx) => {
       NoCheck
     ))
   }
-
-  /* Connect the device with the token and set as registered */
+  /**
+   * Create a new device and connext it to
+   * the API Token and Registration code.
+   */
   const {
     deviceCreate: { createdAt, id }
   } = await ctx.api.gqlRequest(
@@ -121,11 +126,11 @@ export default async (event, ctx) => {
     },
     NoCheck
   )
-
   /* eslint-disable-next-line no-console */
   console.log(`Token added to device with ID ${id} at ${createdAt}`)
-
-  /* Return response */
+  /**
+   * Return device id and apiToken in response
+   */
   return {
     data: {
       id,

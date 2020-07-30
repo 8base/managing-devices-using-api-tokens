@@ -9,7 +9,7 @@ const { InMemoryCache } = require('apollo-cache-inmemory')
 const storage = require('../storage')
 
 const httpLink = createHttpLink({
-  uri: 'https://api.8base.com/cjz1n2qrk00f901jt2utcc3m0',
+  uri: 'https://api.8base.com/cjz1n2qrk00f901jt2utcc3m0', // <EIGHTBASE_WORKSPACE_API_ENDPOINT>
   fetch
 })
 
